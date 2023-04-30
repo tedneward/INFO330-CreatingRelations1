@@ -87,6 +87,19 @@ Buildings also have rooms, so create a *second* table, called "rooms" that has t
 
 **NOTE:** Inserting into rooms can be tricky in a script if you don't know the auto-generated IDs for the building ahead of time, because the database is responsible for generating them. This is where a nested select can often be helpful: `INSERT INTO rooms VALUES (400, (SELECT id FROM buildings WHERE name="Mary Gates Hall"), 40);` for example.
 
+Insert the following data:
+
+* Mary Gates Hall (shortname "MGH"), which has the following rooms in it:
+    * Rm 400, which seats 40
+    * Rm 500, which seats 40
+    * Rm 100, which seats 5
+* Raitt Hall (shortname "RAI"), which has the following rooms in it:
+    * Rm 123, which seats 70
+    * Rm 456, which seats 5
+    * Rm 457, which seats 5
+* Meany Hall (shortname "MEA"), which has the following rooms in it:
+    * Rm 1, which seats 400
+
 ### Student Registrations (`registrations.sql`)
 
 Students need to be able to sign up for courses, which is a many-to-many relationship, so we need to create a table that reflects this relationship. Create a table called "student_courses" that has the following attributes:
@@ -108,9 +121,7 @@ Make sure the following students are enrolled in the following list of courses:
 
 ## Extra credit
 
-* Let's put courses in rooms at times. (2 pts)
+* **Put courses in rooms at times.** (2 pts)
     * Create a new table, `timeslots`, that contain the start and end times that courses can be held and an `id` primary key. 
     * Modify `room` to have a `id` primary key.
     * Create another table, `schedule`, that has a `coursecode`, a `roomid`, and a `timeslotid`, and add an integrity constraint that requires the combination of `roomid`, and `timeslotid` to be unique--in other words, you can never have two different courses in the same room at the same time!
-
-* 
